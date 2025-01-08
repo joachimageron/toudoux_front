@@ -12,37 +12,43 @@ export default function Page() {
   
   const toggleVisibility = () => setIsVisible(!isVisible);
   
- const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  setLoading(true);
-
-  const formData = new FormData(event.currentTarget);
-  const email = formData.get("email");
-  const password = formData.get("password");
-
-  try {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+    
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    
+    try {
+      const data = await signIn(email as string, password as string);
+      toast.success("Login successful");
+      
+      console.log("Login successful:", data);
+      // Automatically switch to login form
+      
+    } catch (err) {
+      toast.error(err.toString());
+    }
+    setLoading(false);
+  };
+  
+  const signIn = async (email: string, password: string) => {
     const response = await fetch("http://localhost:8000/api/auth", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({email, password}),
     });
-
+    
     if (!response.ok) {
       throw new Error("Invalid credentials");
     }
-
-    const data = await response.json();
-    console.log("Login successful:", data);
-
-    // Redirect user after successful login
-
-  } catch (err) {
-    toast.error(err.toString());
+    
+    return response.json();
   }
-  setLoading(false);
-};
+  
   
   return (
     <div className="flex h-[90vh] w-full items-center justify-center">
