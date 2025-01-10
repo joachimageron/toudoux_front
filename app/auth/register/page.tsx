@@ -54,8 +54,10 @@ export default function Page() {
     if (!response.ok) {
       throw new Error("Invalid credentials");
     }
+    const data = await response.json();
+    window.sessionStorage.setItem("token", data.token);
     
-    return response.json();
+    return data;
   }
   
   const register = async (email: string, password: string) => {
