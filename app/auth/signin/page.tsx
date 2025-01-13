@@ -4,9 +4,11 @@ import React from "react";
 import {Button, Input, Link, Form, Checkbox} from "@nextui-org/react";
 import {Icon} from "@iconify/react";
 import toast from 'react-hot-toast';
+import {useRouter} from "next/navigation";
 
 
 export default function Page() {
+  const router = useRouter();
   const [isVisible, setIsVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   
@@ -25,6 +27,7 @@ export default function Page() {
       toast.success("Login successful");
       
       console.log("Login successful:", data);
+      router.push("/notes");
       // Automatically switch to login form
       
     } catch (err) {
@@ -46,7 +49,9 @@ export default function Page() {
       throw new Error("Invalid credentials");
     }
     
-    return response.json();
+    const data = await response.json();
+    sessionStorage.setItem("token", data.token);
+    return data;
   }
   
   

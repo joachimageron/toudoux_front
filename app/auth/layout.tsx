@@ -2,9 +2,10 @@
 
 import {useRouter} from "next/navigation";
 import {useEffect} from "react";
+import NavBar from "@/app/components/NavBar";
 
 
-export default function Layout({children}: Readonly<{children: React.ReactNode;}>) {
+export default function Layout({children}: Readonly<{ children: React.ReactNode; }>) {
   const router = useRouter();
   
   useEffect(() => {
@@ -12,11 +13,12 @@ export default function Layout({children}: Readonly<{children: React.ReactNode;}
       router.push("/notes");
     }
   }, []);
-
+  
   
   return (
     <>
-        {children}
+      <NavBar/>
+      {children}
     </>
   );
 }
