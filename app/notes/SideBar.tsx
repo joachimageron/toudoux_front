@@ -11,7 +11,7 @@ export default function SideBar() {
     <aside className={"p-5"}>
       <CategoryModal isOpen={isOpen} onOpenChange={onOpenChange}/>
       <Button className={""} onPress={()=>onOpen()}>
-        <Icon className={"text-xl"} icon={"fa6-solid:plus"}/>
+        <Icon className={"text-xl"} icon={"mage:home-plus-fill"}/>
         Category
       </Button>
     </aside>

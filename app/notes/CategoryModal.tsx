@@ -13,7 +13,6 @@ import toast from "react-hot-toast";
 
 export default function CreatePostButton({isOpen, onOpenChange}: Readonly<{
   isOpen: boolean,
-  onOpen: () => void,
   onOpenChange: () => void;
 }>) {
   const [isLoading, setIsLoading] = useState(false);
