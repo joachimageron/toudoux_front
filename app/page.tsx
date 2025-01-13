@@ -13,6 +13,8 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     setError(null);
 
+
+
     try {
       const response = await fetch("http://localhost:8000/api/auth", {
         method: "POST",
@@ -27,10 +29,11 @@ const LoginPage: React.FC = () => {
       }
 
       const data = await response.json();
+
       console.log("Login successful:", data);
 
       // Redirect user after successful login
-      router.push("/dashboard");
+      router.push('/dashboard')
     } catch (err) {
       setError((err as Error).message);
     }
@@ -66,6 +69,11 @@ const LoginPage: React.FC = () => {
     }
   };
 
+  const resetPassword = async () => {
+      router.push("/password-reset");
+
+  }
+
   return (
     <div style={styles.container}>
       <form onSubmit={isRegistering ? handleRegister : handleLogin} style={styles.form}>
@@ -99,6 +107,7 @@ const LoginPage: React.FC = () => {
             required
             style={styles.input}
           />
+          <p onClick={() => resetPassword()} style={styles.passwordReset}>{!isRegistering ? "Forgot your password ?" : ""}</p>
         </div>
 
         <button type="submit" style={styles.button}>
@@ -171,7 +180,7 @@ const styles = {
   annotation: {
     marginTop: "1rem",
     fontSize: "0.875rem",
-    color: "#0070f3",
+    color: "#",
     textAlign: "center" as "center",
     cursor: "pointer" as "pointer",
   },
@@ -181,6 +190,13 @@ const styles = {
     fontSize: "0.875rem",
     textAlign: "center" as "center",
   },
+  passwordReset: {
+    display: "flex",
+    color: "#0070f3",
+    justifyContent: "flex-end",
+    fontSize: "0.775rem",
+    cursor: "pointer"
+  }
 };
 
 export default LoginPage;
