@@ -7,8 +7,8 @@ import DarkModeSwitch from "@/app/components/DarkModeSwitch";
 export default function NavBar() {
   const token = sessionStorage.getItem("token");
   return (
-    <nav className={"fixed bottom-0 left-0 w-full h-12 bg-primary flex justify-center items-center z-30"}>
-      <div className={"flex justify-center gap-10 items-center"}>
+    <nav className={"fixed top-0 left-0 w-full h-12 bg-primary flex justify-start items-center z-30"}>
+      <div className={"flex justify-center gap-10 items-center px-5"}>
         { token && (
               <>
                 <Link href={"/notes"} className={"w-7"}>
@@ -17,7 +17,6 @@ export default function NavBar() {
                 <div className={"w-7"}>
                   <UserAvatarMenu/>
                 </div>
-              
               </>
             )
         }
