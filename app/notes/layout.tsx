@@ -10,7 +10,9 @@ export default function Layout({children}: Readonly<{children: React.ReactNode;}
     if (!sessionStorage.getItem("token")) {
       router.push("/auth/signin");
     }
-  }, []);  return (
+  }, []);
+  
+  return (
     <>
       <NavBar/>
       {children}
