@@ -112,7 +112,7 @@ return (
     <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 py-6 shadow-small">
       <div className="flex flex-col gap-1">
         <h1 className="text-large font-medium">Create an account</h1>
-        <p className="text-small text-default-500">to continue to BypolarMedia</p>
+        <p className="text-small text-default-500">to continue to Toudoux</p>
       </div>
       
       <Form className="flex flex-col gap-3" validationBehavior="native" onSubmit={handleSubmit}>

@@ -31,6 +31,8 @@ export default function Page() {
       // Automatically switch to login form
       
     } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       toast.error(err.toString());
     }
     setLoading(false);
@@ -60,7 +62,7 @@ export default function Page() {
       <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 py-6 shadow-small">
         <div className="flex flex-col gap-1">
           <h1 className="text-large font-medium">Sign in to your account</h1>
-          <p className="text-small text-default-500">to continue to BypolarMedia</p>
+          <p className="text-small text-default-500">to continue to Toudoux</p>
         </div>
         
         <Form className="flex flex-col gap-3" validationBehavior="native" onSubmit={handleSubmit}>
