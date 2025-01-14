@@ -31,9 +31,7 @@ export default function Page() {
       // Automatically switch to login form
       
     } catch (err) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      toast.error(err.toString());
+      toast.error(String(err));
     }
     setLoading(false);
   };

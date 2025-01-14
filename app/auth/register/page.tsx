@@ -38,7 +38,7 @@ export default function Page() {
       
       // Automatically switch to login form
     } catch (err) {
-      toast.error(err.toString());
+      toast.error(String(err));
     }
     
     setLoading(false);
@@ -96,9 +96,6 @@ if (password.length > 0) {
   if (password.length < 4) {
     errorPassword.push("Password must be 4 characters or more.");
   }
-  // if ((password.match(/[A-Z]/g) || []).length < 1) {
-  //   errorPassword.push("Password must include at least 1 upper case letter");
-  // }
   if ((password.match(/[^a-z0-9]/gi) || []).length < 1) {
     errorPassword.push("Password must include at least 1 symbol.");
   }
