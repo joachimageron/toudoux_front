@@ -11,7 +11,7 @@ export default function NavBar() {
     
   }, []);
   return (
-    <nav className={"sticky top-0 left-0 w-full h-12 bg-primary flex justify-start items-center z-30"}>
+    <nav className={"w-full h-[5vh] bg-primary flex justify-start items-center z-30"}>
       <div className={"flex justify-center gap-10 items-center px-5"}>
         {token && (
           <>
@@ -26,7 +26,7 @@ export default function NavBar() {
         }
       </div>
       
-      <div className={"absolute right-5"}>
+      <div className={""}>
         <DarkModeSwitch/>
       </div>
     </nav>

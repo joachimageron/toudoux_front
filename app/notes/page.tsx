@@ -45,10 +45,10 @@ export default function Page() {
   
   return (
     <div className={'flex'}>
-      <SideBar setCategories={setCategories}/>
-      <main className={'flex gap-3 p-5 overflow-x-scroll'}>
+      <SideBar categories={categories} setCategories={setCategories}/>
+      <main className={'flex gap-3 p-5 overflow-x-scroll h-[94vh]'}>
         {categories?.member.map((category) => (
-          <CategoryContainer category={category} key={category.id+"coucou"}/>
+          <CategoryContainer category={category} setCategories={setCategories} key={category.id+"coucou"}/>
         ))}
       </main>
     </div>

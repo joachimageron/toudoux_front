@@ -20,7 +20,7 @@ type CreatePostButtonProps = {
   setCategories: React.Dispatch<React.SetStateAction<Categories | undefined>>
 }
 
-export default function CreatePostButton({isOpen, onOpenChange, setCategories}: Readonly<CreatePostButtonProps>)
+export default function CreateCategoryModal({isOpen, onOpenChange, setCategories}: Readonly<CreatePostButtonProps>)
 {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
