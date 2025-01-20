@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 
 
 export default function DarkModeSwitch() {
-  const [isSelected, setIsSelected] = useState(false)
+  const [isSelected, setIsSelected] = useState(true)
   
   useEffect(() => {
     if (isSelected) {
