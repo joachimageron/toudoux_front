@@ -50,6 +50,7 @@ export default function Page() {
     }
     
     const data = await response.json();
+    console.log(data.token);
     sessionStorage.setItem("token", data.token);
     return data;
   }
@@ -99,7 +100,7 @@ export default function Page() {
             <Checkbox name="remember" size="sm">
               Remember me
             </Checkbox>
-            <Link className="text-default-500" href="#" size="sm">
+            <Link className="text-default-500" href="/forgot-password" size="sm">
               Forgot password?
             </Link>
           </div>

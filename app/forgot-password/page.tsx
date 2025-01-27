@@ -1,6 +1,8 @@
 'use client'
 // app/forgot-password/page.tsx
 import { useState } from 'react';
+import { Button, Input, Link, Form } from "@nextui-org/react";
+import toast from "react-hot-toast";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -15,7 +17,7 @@ export default function ForgotPasswordPage() {
     setMessage(null);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/password/reset', {
+      const response = await fetch('http://127.0.0.1:8000/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,8 +29,9 @@ export default function ForgotPasswordPage() {
         throw new Error('Unable to send reset email');
       }
 
-      setMessage('An email has been sent to reset your password.');
+      toast.success("Sending mail successful");
     } catch (err) {
+      toast.error("Failed sending mail...");
       setError((err as Error).message);
     } finally {
       setIsLoading(false);
@@ -36,29 +39,34 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h1 style={styles.title}>Forgot your password?</h1>
-        <div style={styles.field}>
-          <label htmlFor="email" style={styles.label}>Enter your email:</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={styles.input}
-          />
-        </div>
-
-        {error && <p style={styles.error}>{error}</p>}
-        {message && <p style={styles.message}>{message}</p>}
-
-        <button type="submit" style={styles.button} disabled={isLoading}>
+    <div className="flex h-[90vh] w-full items-center justify-center">
+    <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 py-6 shadow-small">
+      <div className="flex flex-col gap-1">
+        <h1 className="text-large font-medium">Forgot your password ?</h1>
+        <p className="text-small text-default-500">Change it to continue Toudoux</p>
+      </div>
+      <Form onSubmit={handleSubmit} className="flex flex-col gap-3" validationBehavior="native" >
+        <Input
+          isRequired
+          label="Email Address"
+          name="email"
+          placeholder="Enter your email"
+          type="email"
+          variant="bordered"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Button className="w-full" color="primary" type="submit">
           {isLoading ? 'Sending...' : 'Send Reset Email'}
-        </button>
-      </form>
+        </Button>
+      </Form>
+      <p className="text-center text-small">
+        Already an account ?&nbsp;
+        <Link href="/auth/signin" size="sm">
+          Sign In
+        </Link>
+      </p>
     </div>
+  </div>
   );
 }
 
