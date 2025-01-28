@@ -96,7 +96,6 @@ export default function EditCategoryModal({
     const token = sessionStorage.getItem("token");
     
     const body = JSON.stringify({name, description, color});
-    console.log(body)
     const response = await fetch(`http://localhost:8000/api/categories/${category.id}`, {
       method: "PATCH",
       headers: {

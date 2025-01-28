@@ -29,7 +29,6 @@ export default function Page() {
       const data = await register(email as string, password as string);
       toast.success("Registration successful");
       
-      console.log("Registration successful:", data);
       toast.promise(signIn(email as string, password as string), {
         loading: "Logging in...",
         success: "Login successful",

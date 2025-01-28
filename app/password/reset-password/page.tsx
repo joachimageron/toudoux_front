@@ -35,7 +35,7 @@ export default function Page() {
     setIsTokenValid(true); // On réinitialise la validité du token
     
     try {
-      const response = await fetch(`http://127.0.0.1:8000/reset-password?token=${token}`);
+      const response = await fetch(`http://localhost:8000/reset-password?token=${token}`);
 
       if (response.status === 404) {
         setMessage('Le token is invalid.');
@@ -74,7 +74,7 @@ export default function Page() {
     try {
       // Ensure token is not null before sending the request
   
-      const response = await fetch(`http://127.0.0.1:8000/change-password?userId=${userId}&token=${token}`, {
+      const response = await fetch(`http://localhost:8000/change-password?userId=${userId}&token=${token}`, {
         method: 'PUT',
         headers: {
           "Content-Type": "application/json",
@@ -191,7 +191,7 @@ export default function Page() {
           <div className="flex flex-col items-center justify-center">
             { message ? <p className="text-red-500">{message}</p> : <></>}
             <Button
-              onClick={() => router.push("/forgot-password")}
+              onClick={() => router.push("/password/forgot-password")}
               className="mt-4"
               color="primary"
             >
