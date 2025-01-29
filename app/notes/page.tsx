@@ -29,7 +29,7 @@ export default function Page() {
       else if (response.status === 401) {
         toast.error("Unauthorized");
         window.sessionStorage.removeItem("token");
-        router.push("auth/signin");
+        router.push("/auth/signin");
       }
       else {
         toast.error("An error occurred while fetching categories");
