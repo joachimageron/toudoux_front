@@ -4,6 +4,7 @@ import {Icon} from "@iconify/react";
 import React, {useEffect, useState} from "react";
 import {Categories, Category} from "@/utils/types/Category";
 import EditCategoryModal from "@/app/notes/EditCategoryModal";
+import EditTaskModal from "@/app/notes/EditTaskModal";
 import toast from "react-hot-toast";
 import {useRouter} from "next/navigation";
 import {Task, TaskCollection} from "@/utils/types/Task";
@@ -18,8 +19,10 @@ export default function CategoryContainer({category, setCategories}: Readonly<Ca
   const router = useRouter();
   
   const [tasks, setTasks] = useState<TaskCollection | undefined>()
-  const [showAddTaskForm, setShowAddTaskForm] = useState(false)
-  const {isOpen, onOpen, onOpenChange} = useDisclosure()
+  const [showAddTaskForm, setShowAddTaskForm] = useState(false);
+  const { isOpen: isEditCategoryModalOpen, onOpen: onEditCategoryModalOpen, onOpenChange: onEditCategoryModalOpenChange } = useDisclosure();
+  const { isOpen: isEditTaskModalOpen, onOpen: onEditTaskModalOpen, onOpenChange: onEditTaskModalOpenChange } = useDisclosure();
+  const [selectedTask, setSelectedTask] = useState<Task | null | undefined>()
   
   const getTasks = async () => {
     const token = sessionStorage.getItem("token");
@@ -124,10 +127,11 @@ export default function CategoryContainer({category, setCategories}: Readonly<Ca
   
   return (
     <Card className="w-72 min-w-72 h-fit">
-      <EditCategoryModal isOpen={isOpen} onOpenChange={onOpenChange} category={category} setCategories={setCategories}/>
+      <EditCategoryModal isOpen={isEditCategoryModalOpen} onOpenChange={onEditCategoryModalOpenChange} category={category} setCategories={setCategories} />
+      <EditTaskModal isOpen={isEditTaskModalOpen} onOpenChange={onEditTaskModalOpenChange} task={selectedTask} />
       <CardHeader className="flex gap-3 justify-between items-center">
         <p className="text-xl">{category.name}</p>
-        <button onClick={() => onOpen()}>
+        <button onClick={() => onEditCategoryModalOpen()}>
           <Icon icon="material-symbols:edit-rounded" width="18" height="18"/>
         </button>
       </CardHeader>
@@ -151,7 +155,7 @@ export default function CategoryContainer({category, setCategories}: Readonly<Ca
             <Input name={"taskTitle"} className={'-ml-2'} autoFocus size={"sm"} type="text" placeholder="Task name"/>
           </Form>
         )}
-        <Skeleton className="w-3/5 rounded-lg" isLoaded={!!tasks}>
+        <Skeleton className="w-5/5 rounded-lg" isLoaded={!!tasks}>
           <ul className={'min-h-3'}>
             {tasks?.member.map((task, index) => (
               <li key={index + "coucou"} className="flex gap-3 items-center p-1">
@@ -160,8 +164,10 @@ export default function CategoryContainer({category, setCategories}: Readonly<Ca
                   onValueChange={() => handleTaskChange(task.id)}
                   name={task.title}
                 >
-                  {task.title}
                 </Checkbox>
+                <p onClick={() => {onEditTaskModalOpen(), setSelectedTask(task)}}>
+                  {task.title}
+                </p>
               </li>
             ))}
           </ul>
